@@ -24,7 +24,9 @@ public class Usuario {
     @Column (name = "dataCriacao")
     private LocalDateTime dataCriacao;
 
-
+ // Construtor padrão
+ public Usuario() {
+}
 
     public Usuario(Long id, String nome, LocalDateTime dataCriacao) {
         this.id = id;
