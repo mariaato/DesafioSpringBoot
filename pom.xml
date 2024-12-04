@@ -68,4 +68,10 @@
 		</plugins>
 	</build>
 
+	<dependency>
+		<groupId>javax.validation</groupId>
+		<artifactId>javax.validation-api</artifactId>
+		<version>2.0.1.Final</version>
+	</dependency>
+
 </project>

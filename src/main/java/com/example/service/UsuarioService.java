@@ -1,21 +1,17 @@
 package com.example.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.model.Usuario;
-import com.example.repository.UsuarioRepository;
 
-@Service
-public class UsuarioService {
-    
-    @Autowired
-    UsuarioRepository usuarioRepository;
+public interface UsuarioService {
 
+    Iterable<Usuario> buscarTodos(); //Este método não recebe parâmetros e retorna que é uma coleção que pode ser percorrida
 
-	@Override
-	public Iterable<Usuario> buscarTodos() {
-		// Buscar todos os Clientes.
-		return usuarioRepository.findAll();
-	}
+    Usuario buscarPorId(Long Id);
+
+    void inserir(Usuario usuario);
+
+    void atualizar(Long id, Usuario usuario);
+
+    void deletar(Long id);
+
 }

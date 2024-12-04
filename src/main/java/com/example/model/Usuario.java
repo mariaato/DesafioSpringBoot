@@ -24,6 +24,8 @@ public class Usuario {
     @Column (name = "dataCriacao")
     private LocalDateTime dataCriacao;
 
+    @Column (name = "cpf", unique = true)
+    private String cpf;
  // Construtor padrão
  public Usuario() {
 }
