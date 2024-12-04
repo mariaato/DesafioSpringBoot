@@ -26,14 +26,17 @@ public class Usuario {
 
     @Column (name = "cpf", unique = true)
     private String cpf;
- // Construtor padrão
- public Usuario() {
-}
 
-    public Usuario(Long id, String nome, LocalDateTime dataCriacao) {
+
+    // Construtor padrão necessário para o Hibernate
+    public Usuario() {
+    } 
+    
+    public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf) {
         this.id = id;
         this.nome = nome;
         this.dataCriacao = dataCriacao;
+        this.cpf = cpf;
     }
 
     public Long getId(){
@@ -58,5 +61,13 @@ public class Usuario {
 
     public void setDataCriacao(LocalDateTime dataCriacao){
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getCpf(){
+        return cpf;
+    }
+
+    public void setCpf(String cpf){
+        this.cpf = cpf;
     }
 }

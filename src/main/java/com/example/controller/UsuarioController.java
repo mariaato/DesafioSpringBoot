@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping(value = "/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
+    
     //Listagem Geral
     @GetMapping
     public ResponseEntity<Iterable<Usuario>> buscarTodos() {
@@ -47,7 +48,7 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
         usuarioService.atualizar(id, usuario);        
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
     
     //Deletar

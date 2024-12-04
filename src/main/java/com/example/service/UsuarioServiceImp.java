@@ -1,10 +1,11 @@
 package com.example.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.example.model.Usuario;
 import com.example.repository.UsuarioRepository;
@@ -19,7 +20,7 @@ public class UsuarioServiceImp implements UsuarioService {
 
 
 	@Override
-	public Iterable<Usuario> buscarTodos() {
+	public List<Usuario> buscarTodos() {
 		// Buscar todos os Clientes.
 		return usuarioRepository.findAll();
 	}
@@ -31,16 +32,18 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public void inserir(Usuario usuario){
-		usuarioRepository.save(usuario);
+	public Usuario inserir(Usuario usuario){
+		usuario.setDataCriacao(LocalDateTime.now());
+		return usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public void atualizar(Long id, Usuario usuario){
+	public Usuario atualizar(Long id, Usuario usuario){
 		Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
 		if(usuarioBd.isPresent()){
-			usuarioRepository.save(usuario);
+			return usuarioRepository.save(usuario);
 		}
+		return null;
 	}
 
 	@Override
