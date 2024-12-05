@@ -1,6 +1,10 @@
 package com.example.model; 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +25,12 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @Column (name = "dataCriacao")
+    @Column (name = "dataCriacao", updatable = false)
     private LocalDateTime dataCriacao;
 
     @Column (name = "cpf", unique = true)
+    @CPF
+    @NotBlank
     private String cpf;
 
 

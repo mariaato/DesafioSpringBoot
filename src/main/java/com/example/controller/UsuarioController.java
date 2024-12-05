@@ -39,14 +39,14 @@ public class UsuarioController {
 
     // Cadastrar
     @PostMapping
-    public ResponseEntity<Usuario> inserir(@RequestBody Usuario usuario ) {
+    public ResponseEntity<Usuario> inserir(@RequestBody Usuario usuario ) throws Exception {
         usuarioService.inserir(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     // Atualizar
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario) throws Exception{
         usuarioService.atualizar(id, usuario);        
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }

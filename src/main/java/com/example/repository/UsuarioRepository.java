@@ -7,5 +7,5 @@ import com.example.model.Usuario;
 
 @Repository
 public interface UsuarioRepository  extends JpaRepository<Usuario, Long>{
-
+    public Usuario findTop1ByCpf(String cpf);
 }

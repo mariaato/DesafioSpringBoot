@@ -32,19 +32,33 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Usuario inserir(Usuario usuario){
+	public Usuario inserir(Usuario usuario)throws Exception{
+		if(usuarioRepository.findTop1ByCpf(usuario.getCpf()) != null) {
+			throw new Exception("O cpf inserido já pertence a outro usuario");
+		}
 		usuario.setDataCriacao(LocalDateTime.now());
 		return usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public Usuario atualizar(Long id, Usuario usuario){
+	public Usuario atualizar(Long id, Usuario usuarioAtualizado)throws Exception{
+
 		Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
-		if(usuarioBd.isPresent()){
-			return usuarioRepository.save(usuario);
+
+		Usuario usuarioExistente = usuarioRepository.findTop1ByCpf(usuarioAtualizado.getCpf());
+
+		if(usuarioExistente != null && !usuarioAtualizado.getId().equals(usuarioExistente.getId())){
+			throw new Exception("O CPF inserido já pertence a outro usuário");
 		}
-		return null;
+
+		if(usuarioBd.isPresent()){
+			usuarioAtualizado.setDataCriacao(usuarioBd.get().getDataCriacao());
+			return usuarioRepository.save(usuarioAtualizado);
+		}
+			
+		throw new Exception("Usuário não encontrado");
 	}
+	
 
 	@Override
 	public void deletar(Long id){

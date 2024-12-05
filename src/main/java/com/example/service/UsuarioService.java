@@ -10,9 +10,9 @@ public interface UsuarioService {
 
     Usuario buscarPorId(Long Id);
 
-    Usuario inserir(Usuario usuario);
+    Usuario inserir(Usuario usuario) throws Exception;
 
-    Usuario atualizar(Long id, Usuario usuario);
+    Usuario atualizar(Long id, Usuario usuario) throws Exception;;
 
     void deletar(Long id);
 
