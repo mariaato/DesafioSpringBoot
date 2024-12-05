@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,15 +46,12 @@ public class UsuarioServiceImp implements UsuarioService {
 
 		Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
 
-		Usuario usuarioExistente = usuarioRepository.findTop1ByCpf(usuarioAtualizado.getCpf());
-
-		if(usuarioExistente != null && !usuarioAtualizado.getId().equals(usuarioExistente.getId())){
-			throw new Exception("O CPF inserido já pertence a outro usuário");
-		}
-
 		if(usuarioBd.isPresent()){
-			usuarioAtualizado.setDataCriacao(usuarioBd.get().getDataCriacao());
-			return usuarioRepository.save(usuarioAtualizado);
+			// usuarioAtualizado.setDataCriacao(usuarioBd.get().getDataCriacao());
+			var user = usuarioBd.get();
+			BeanUtils.copyProperties(usuarioAtualizado, user, "id","dataCriacao");
+
+			return usuarioRepository.save(user);
 		}
 			
 		throw new Exception("Usuário não encontrado");
