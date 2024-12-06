@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
+// import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Usuario;
 import com.example.repository.UsuarioRepository;
+import com.example.util.BeanUtil;
 
 
 
@@ -27,9 +28,18 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Usuario buscarPorId(Long id) {
+	public Usuario buscarPorId(Long id){
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
-		return usuario.get();
+
+		try{
+			if(usuario != null){
+				return usuario.get();
+
+			}
+		}catch(Exception e){
+			throw new RuntimeException("Usuario não encontrado", e);
+		}
+		return null;
 	}
 
 	@Override
@@ -46,10 +56,13 @@ public class UsuarioServiceImp implements UsuarioService {
 
 		Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
 
+		if(usuarioRepository.findTop1ByCpf(usuarioAtualizado.getCpf()) != null) {
+			throw new Exception("O cpf inserido já pertence a outro usuario");
+		}
 		if(usuarioBd.isPresent()){
 			// usuarioAtualizado.setDataCriacao(usuarioBd.get().getDataCriacao());
-			var user = usuarioBd.get();
-			BeanUtils.copyProperties(usuarioAtualizado, user, "id","dataCriacao");
+			Usuario user = usuarioBd.get();
+			BeanUtil.copyNonNullProperties(usuarioAtualizado, user);
 
 			return usuarioRepository.save(user);
 		}
@@ -59,8 +72,13 @@ public class UsuarioServiceImp implements UsuarioService {
 	
 
 	@Override
-	public void deletar(Long id){
-		usuarioRepository.deleteById(id);
+	public void deletar(Long id) throws Exception{
+		try {
+			usuarioRepository.deleteById(id);
+
+		} catch (Exception e) {
+			throw new Exception("Usuario não encontrado");
+		}
 	}
 
 }

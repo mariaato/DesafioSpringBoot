@@ -1,7 +1,8 @@
 package com.example.model; 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -22,10 +23,13 @@ public class Usuario {
     @Column(name = "id")
     private Long id;
 
+
     @Column(name = "nome")
+    @NotBlank(message = "Nome é obrigatório.")
     private String nome;
 
     @Column (name = "dataCriacao", updatable = false)
+    @NotNull
     private LocalDateTime dataCriacao;
 
     @Column (name = "cpf", unique = true)
@@ -34,16 +38,16 @@ public class Usuario {
     private String cpf;
 
 
-    // Construtor padrão necessário para o Hibernate
-    public Usuario() {
-    } 
+    // // Construtor padrão necessário para o Hibernate
+    // public Usuario() {
+    // } 
     
-    public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.dataCriacao = dataCriacao;
-        this.cpf = cpf;
-    }
+    // public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf) {
+    //     this.id = id;
+    //     this.nome = nome;
+    //     this.dataCriacao = dataCriacao;
+    //     this.cpf = cpf;
+    // }
 
     public Long getId(){
         return id;
