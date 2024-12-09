@@ -1,17 +1,18 @@
 ### 🙍Sistema de Gestão de Entidades com Spring Boot 
 
-## 🚀 Desafio
+## 🚀Descrição
 
-Desenvolver uma aplicação em Java utilizando Spring Boot que implemente as operações básicas de um sistema CRUD (Create, Read, Update, Delete). A aplicação deve seguir boas práticas de desenvolvimento, incluindo a separação de responsabilidades entre as camadas do sistema.
-
-## 💻 Tecnologias 
-
-- Spring Boot
-- Java
-- Postgres
+O Sistema de Gestão de Entidades é uma aplicação em Java construída com o Spring Boot que implementa operações CRUD (Create, Read, Update, Delete). Ela foi desenvolvida com foco em boas práticas, incluindo separação de responsabilidades por camadas e uso de tecnologias modernas, como o Hibernate para ORM.
 
 
-### 📋 Pré-requisitos
+## 🎯 Objetivos
+- Implementar operações CRUD básicas.
+- Seguir padrões de arquitetura em camadas (Controller, Service, Repository).
+- Utilizar Hibernate para mapeamento de entidades.
+- Garantir validação de dados para evitar inconsistências no banco.
+
+
+## 📋 Pré-requisitos
 
 Antes de executar o projeto, você precisará ter os seguintes requisitos instalados:
 
@@ -19,6 +20,30 @@ Antes de executar o projeto, você precisará ter os seguintes requisitos instal
 - Maven
 - IDE (opcional): Recomenda-se o uso de uma IDE como IntelliJ IDEA, Eclipse, ou VSCode para facilitar o desenvolvimento.
 - PostgreSQL
+- 
+## 📋 Requisitos Funcionais Implementados
+- Cadastro de Entidades: Permite o registro de novas entidades no sistema.
+- Listagem Geral: Exibe todas as entidades cadastradas.
+- Consulta por ID: Busca por entidades utilizando seu identificador único.
+- Atualização de Dados: Atualiza informações de entidades já cadastradas.
+- Remoção de Registros: Remove entidades do sistema com base no ID.
+
+
+### 🛠 Requisitos Técnicos Atendidos
+#### Frameworks:
+- Spring Boot 3.x
+- Hibernate 6.x
+#### Banco de Dados:
+- PostgreSQL
+- Arquitetura em camadas:
+   - Controller: Manipula requisições HTTP e envia respostas.
+   - Service: Implementa lógica de negócios.
+   - Repository: Gerencia a persistência no banco de dados.
+- Modelo de dados:
+   - id (Long) - Identificador único.
+   - nome (String) - Nome da entidade.
+   - dataCriacao (LocalDateTime) - Data de criação do registro.
+
 
 
 ### 🔧 Instalação
