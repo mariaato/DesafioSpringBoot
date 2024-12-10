@@ -1,9 +1,11 @@
 package com.example.controller;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -34,9 +36,9 @@ public class UsuarioController {
     
     //Listagem Geral
     @GetMapping
-    public ResponseEntity<List<Usuario>> buscarTodos(@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3") int size) {
-        // List<Usuario> usuarios = usuarioService.buscarTodos(page, size)
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarTodos(page, size));
+    public ResponseEntity<Page<Usuario>> buscarTodos(@RequestParam(name = "page",defaultValue = "0")int page, @RequestParam(name = "size",defaultValue = "3") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarTodos(pageable));
     }
 
     //Consulta po ID

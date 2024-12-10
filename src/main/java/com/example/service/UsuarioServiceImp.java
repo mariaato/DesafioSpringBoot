@@ -1,11 +1,12 @@
 package com.example.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 // import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Usuario;
@@ -26,14 +27,9 @@ public class UsuarioServiceImp implements UsuarioService {
 
 
 	@Override
-	public List<Usuario> buscarTodos(int page, int size) {
-		// Buscar todos os Clientes.
-		List<Usuario> usuario = usuarioRepository.findAll();
+	public Page<Usuario> buscarTodos(Pageable pageable) {
+		return usuarioRepository.findAll(pageable);
 
-		int fromIndex = Math.min(page * size, usuario.size());
-		int toIndex = Math.min(fromIndex + size, usuario.size());
-		
-		return usuario.subList(fromIndex, toIndex);
 	}
 
 	@Override
