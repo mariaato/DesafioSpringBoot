@@ -28,6 +28,7 @@ public class UsuarioServiceImp implements UsuarioService {
 
 	@Override
 	public Page<Usuario> buscarTodos(Pageable pageable) {
+		
 		return usuarioRepository.findAll(pageable);
 
 	}
@@ -53,6 +54,7 @@ public class UsuarioServiceImp implements UsuarioService {
 			throw new Exception("O cpf inserido já pertence a outro usuario");
 		}
 		usuario.setDataCriacao(LocalDateTime.now());
+		usuario.setExcluido(false);
 		return usuarioRepository.save(usuario);
 	}
 
@@ -79,7 +81,12 @@ public class UsuarioServiceImp implements UsuarioService {
 	@Override
 	public void deletar(Long id) throws Exception{
 		try {
-			usuarioRepository.deleteById(id);
+			// usuarioRepository.deleteById(id);
+			Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
+			
+			Usuario usuario = usuarioBd.get();
+			usuario.setExcluido(true);
+			usuarioRepository.save(usuario);
 
 		} catch (Exception e) {
 			throw new Exception("Usuario não encontrado");

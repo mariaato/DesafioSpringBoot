@@ -2,7 +2,6 @@ package com.example.model;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -32,7 +31,7 @@ public class Usuario {
     private String nome;
 
     @Column (name = "dataCriacao", updatable = false)
-    @NotNull
+    // @NotNull
     private LocalDateTime dataCriacao;
 
     @Column (name = "cpf", unique = true, nullable = false)
@@ -40,6 +39,10 @@ public class Usuario {
     @NotBlank
     private String cpf;
 
+
+    @Column(name = "excluido")
+
+    private boolean excluido;
 
     // // Construtor padrão necessário para o Hibernate
     // public Usuario() {
@@ -82,5 +85,13 @@ public class Usuario {
 
     public void setCpf(String cpf){
         this.cpf = cpf;
+    }
+
+    public boolean getExcluido(){
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido){
+        this.excluido = excluido;
     }
 }

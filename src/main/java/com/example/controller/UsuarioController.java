@@ -56,7 +56,7 @@ public class UsuarioController {
 
     // Atualizar
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable  Long id, @RequestBody @Valid Usuario usuario) throws Exception{
+    public ResponseEntity<Usuario> atualizar(@PathVariable  Long id, @RequestBody Usuario usuario) throws Exception{
         usuarioService.atualizar(id, usuario);        
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }

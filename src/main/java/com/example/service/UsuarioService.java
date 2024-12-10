@@ -15,7 +15,7 @@ public interface UsuarioService {
 
     Usuario inserir( @Valid Usuario usuario) throws Exception;
 
-    Usuario atualizar(Long id, @Valid Usuario usuario) throws Exception;;
+    Usuario atualizar(Long id, Usuario usuario) throws Exception;;
 
     void deletar(Long id) throws Exception;
 
