@@ -12,19 +12,28 @@ import com.example.model.Usuario;
 import com.example.repository.UsuarioRepository;
 import com.example.util.BeanUtil;
 
+import jakarta.validation.Valid;
+
 
 
 @Service
 public class UsuarioServiceImp implements UsuarioService {
     
+
+	
     @Autowired
     UsuarioRepository usuarioRepository;
 
 
 	@Override
-	public List<Usuario> buscarTodos() {
+	public List<Usuario> buscarTodos(int page, int size) {
 		// Buscar todos os Clientes.
-		return usuarioRepository.findAll();
+		List<Usuario> usuario = usuarioRepository.findAll();
+
+		int fromIndex = Math.min(page * size, usuario.size());
+		int toIndex = Math.min(fromIndex + size, usuario.size());
+		
+		return usuario.subList(fromIndex, toIndex);
 	}
 
 	@Override
@@ -43,7 +52,7 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Usuario inserir(Usuario usuario)throws Exception{
+	public Usuario inserir( @Valid Usuario usuario)throws Exception{
 		if(usuarioRepository.findTop1ByCpf(usuario.getCpf()) != null) {
 			throw new Exception("O cpf inserido já pertence a outro usuario");
 		}
@@ -52,7 +61,7 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Usuario atualizar(Long id, Usuario usuarioAtualizado)throws Exception{
+	public Usuario atualizar(Long id, @Valid Usuario usuarioAtualizado)throws Exception{
 
 		Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
 

@@ -17,14 +17,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_usuario")
 
+
 public class Usuario {
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     @NotBlank(message = "Nome é obrigatório.")
     private String nome;
 
@@ -32,7 +35,7 @@ public class Usuario {
     @NotNull
     private LocalDateTime dataCriacao;
 
-    @Column (name = "cpf", unique = true)
+    @Column (name = "cpf", unique = true, nullable = false)
     @CPF
     @NotBlank
     private String cpf;
