@@ -31,7 +31,6 @@ public class Usuario {
     private String nome;
 
     @Column (name = "dataCriacao", updatable = false)
-    // @NotNull
     private LocalDateTime dataCriacao;
 
     @Column (name = "cpf", unique = true, nullable = false)
@@ -48,11 +47,12 @@ public class Usuario {
     // public Usuario() {
     // } 
     
-    // public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf) {
+    // public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf, boolean excluido) {
     //     this.id = id;
     //     this.nome = nome;
     //     this.dataCriacao = dataCriacao;
     //     this.cpf = cpf;
+    //     this.excluido = excluido;
     // }
 
     public Long getId(){

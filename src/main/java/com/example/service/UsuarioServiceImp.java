@@ -29,8 +29,8 @@ public class UsuarioServiceImp implements UsuarioService {
 	@Override
 	public Page<Usuario> buscarTodos(Pageable pageable) {
 		
-		return usuarioRepository.findAll(pageable);
-
+		return usuarioRepository.findByExcluidoFalse(pageable);
+		
 	}
 
 	@Override

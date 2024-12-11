@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @Validated
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuarios/api")
 public class UsuarioController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UsuarioController {
     
     //Listagem Geral
     @GetMapping
-    public ResponseEntity<Page<Usuario>> buscarTodos(@RequestParam(name = "page",defaultValue = "0")int page, @RequestParam(name = "size",defaultValue = "3") int size) {
+    public ResponseEntity<Page<Usuario>> buscarTodos(@RequestParam(name = "page",defaultValue = "0")int page, @RequestParam(name = "size",defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarTodos(pageable));
     }
