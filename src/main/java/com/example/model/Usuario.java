@@ -44,16 +44,27 @@ public class Usuario {
     private boolean excluido;
 
     // // Construtor padrão necessário para o Hibernate
-    // public Usuario() {
-    // } 
+    public Usuario() {
+        
+    } 
     
-    // public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf, boolean excluido) {
-    //     this.id = id;
-    //     this.nome = nome;
-    //     this.dataCriacao = dataCriacao;
-    //     this.cpf = cpf;
-    //     this.excluido = excluido;
-    // }
+    public Usuario(Long id, String nome, LocalDateTime dataCriacao, String cpf, boolean excluido) {
+        this.id = id;
+        this.nome = nome;
+        this.dataCriacao = dataCriacao;
+        this.cpf = cpf;
+        this.excluido = excluido;
+    }
+
+    public Usuario(Usuario usuario) {
+        this.id = usuario.id;
+        this.nome = usuario.nome;
+        this.dataCriacao = usuario.dataCriacao;
+        this.cpf = usuario.cpf;
+        this.excluido = usuario.excluido;    
+    }
+
+   
 
     public Long getId(){
         return id;
@@ -94,4 +105,5 @@ public class Usuario {
     public void setExcluido(boolean excluido){
         this.excluido = excluido;
     }
+
 }
